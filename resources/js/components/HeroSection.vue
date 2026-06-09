@@ -14,7 +14,9 @@ import { heroBg } from "@images"; // fallback temporal desde public/
                 class="w-full h-full object-cover object-center"
             />
             <!-- Gradient overlay: left readable, right transparent -->
-            <div class="absolute inset-0 bg-gradient-to-r from-brand-ivory/85 via-brand-ivory/50 to-transparent" />
+            <div
+                class="absolute inset-0 bg-gradient-to-r from-brand-ivory/85 via-brand-ivory/60 to-transparent"
+            />
         </div>
 
         <!-- Content -->
