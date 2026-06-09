@@ -39,6 +39,15 @@
         "isolatedModules": true,
         "noUncheckedSideEffectImports": true,
         "moduleDetection": "force",
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*":           ["resources/js/*"],
+            "@images":       ["resources/js/assets/images/index.ts"],
+            "@images/*":     ["resources/js/assets/images/*"],
+            "@components":   ["resources/js/components"],
+            "@components/*": ["resources/js/components/*"],
+            "@pages/*":      ["resources/js/Pages/*"]
+        }
     }
 }

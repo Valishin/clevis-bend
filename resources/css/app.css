@@ -1,10 +1,11 @@
+@import '@fontsource/forum/400.css';
+@import '@fontsource/work-sans/300.css';
+@import '@fontsource/work-sans/400.css';
+@import '@fontsource/work-sans/500.css';
+@import '@fontsource/work-sans/600.css';
+@import '@fontsource/work-sans/700.css';
+
 @import 'tailwindcss';
-
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-
-/* ── Google Fonts ── */
-@import url('https://fonts.googleapis.com/css2?family=Forum&family=Work+Sans:wght@300;400;500;600;700&display=swap');
 
 @theme {
     /* ── Tipografía ── */
@@ -12,11 +13,11 @@
     --font-display: 'Forum', ui-serif, Georgia, serif;
 
     /* ── Paleta Clevis Bend ── */
-    --color-brand-dusty-rose:    #B59B85;
-    --color-brand-blush:         #E7C1C6;
-    --color-brand-rose-gold:     #D7A894;
-    --color-brand-champagne:     #F2E6D8;
-    --color-brand-ivory:         #FAF1F2;
+    --color-brand-dusty-rose: #B59B85;
+    --color-brand-blush:      #E7C1C6;
+    --color-brand-rose-gold:  #D7A894;
+    --color-brand-champagne:  #F2E6D8;
+    --color-brand-ivory:      #FAF1F2;
 
     /* Alias semánticos */
     --color-primary:   var(--color-brand-dusty-rose);
