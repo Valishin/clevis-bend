@@ -7,6 +7,10 @@
 
 @import 'tailwindcss';
 
+@keyframes shimmer {
+    100% { transform: translateX(100%); }
+}
+
 @theme {
     /* ── Tipografía ── */
     --font-sans:    'Work Sans', ui-sans-serif, system-ui, sans-serif;

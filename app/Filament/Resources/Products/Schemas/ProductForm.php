@@ -31,6 +31,8 @@ class ProductForm
 
                 FileUpload::make('images')
                     ->label('Imágenes')
+                    ->disk('public')
+                    ->directory('products')
                     ->image()
                     ->multiple()
                     ->reorderable()
