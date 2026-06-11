@@ -7,7 +7,7 @@ import { useReveal } from '@/composables/useReveal'
 const page = ref<HTMLElement | null>(null)
 
 // Un único observer para todos los [data-reveal] de la página
-useReveal(page, { y: 26, duration: 0.7, margin: '0px 0px -60px 0px' })
+useReveal(page, { y: 26, duration: 0.7, margin: '0px 0px -20px 0px' })
 </script>
 
 <template>
