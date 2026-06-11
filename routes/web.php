@@ -5,8 +5,12 @@ use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use App\Models\Product;
 
-Route::get('/about',   fn() => Inertia::render('About'));
-Route::get('/contact', fn() => Inertia::render('Contact'));
+Route::get('/about',    fn() => Inertia::render('About'));
+Route::get('/contact',  fn() => Inertia::render('Contact'));
+Route::get('/products', fn() => Inertia::render('ComingSoon', ['page' => 'Products']));
+
+// Fallback: cualquier ruta no definida → Coming Soon
+Route::fallback(fn() => Inertia::render('ComingSoon'));
 
 Route::post('/contact', function (\Illuminate\Http\Request $request) {
     $data = $request->validate([

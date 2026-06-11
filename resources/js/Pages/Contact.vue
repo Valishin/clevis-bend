@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import CbButton from '@components/CbButton.vue'
-import AppLayout from '@components/layout/AppLayout.vue'
 import CbButton  from '@components/CbButton.vue'
+import AppLayout from '@components/layout/AppLayout.vue'
 import { useForm, usePage } from '@inertiajs/vue3'
 
 const page = usePage()
