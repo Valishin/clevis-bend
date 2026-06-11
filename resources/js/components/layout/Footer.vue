@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { Link } from '@inertiajs/vue3'
+</script>
+
 <template>
     <footer class="bg-brand-ivory border-t border-brand-champagne">
 
@@ -6,7 +10,7 @@
 
             <!-- Brand col -->
             <div class="flex flex-col gap-6">
-                <span class="font-display text-2xl text-neutral-800">Clevis Bend</span>
+                <Link href="/" class="font-display text-2xl text-neutral-800 w-fit">Clevis Bend</Link>
                 <p class="font-sans text-sm text-neutral-500 leading-relaxed max-w-xs">
                     High-performance lingerie components. From the factory floor to global fashion —
                     precision-engineered accessories you can trust.
@@ -15,30 +19,24 @@
 
             <!-- Navigation col -->
             <div class="flex flex-col gap-6">
-                <span class="font-sans text-xs tracking-[0.25em] uppercase text-brand-dusty-rose">
-                    Navigation
-                </span>
+                <span class="font-sans text-xs tracking-[0.25em] uppercase text-brand-dusty-rose">Navigation</span>
                 <nav class="flex flex-col gap-4">
-                    <a href="/products" class="font-sans text-sm text-neutral-600 hover:text-brand-dusty-rose transition-colors w-fit">Products</a>
-                    <a href="/about"    class="font-sans text-sm text-neutral-600 hover:text-brand-dusty-rose transition-colors w-fit">About Us</a>
-                    <a href="/contact"  class="font-sans text-sm text-neutral-600 hover:text-brand-dusty-rose transition-colors w-fit">Contact</a>
+                    <Link href="/products" class="font-sans text-sm text-neutral-600 hover:text-brand-dusty-rose transition-colors w-fit">Products</Link>
+                    <Link href="/about"    class="font-sans text-sm text-neutral-600 hover:text-brand-dusty-rose transition-colors w-fit">About Us</Link>
+                    <Link href="/contact"  class="font-sans text-sm text-neutral-600 hover:text-brand-dusty-rose transition-colors w-fit">Contact</Link>
                 </nav>
             </div>
 
             <!-- Contact col -->
             <div class="flex flex-col gap-6">
-                <span class="font-sans text-xs tracking-[0.25em] uppercase text-brand-dusty-rose">
-                    Get in Touch
-                </span>
-                <p class="font-sans text-sm text-neutral-500">
-                    For inquiries, samples, and partnerships
-                </p>
-                <a
+                <span class="font-sans text-xs tracking-[0.25em] uppercase text-brand-dusty-rose">Get in Touch</span>
+                <p class="font-sans text-sm text-neutral-500">For inquiries, samples, and partnerships</p>
+                <Link
                     href="/contact"
                     class="self-start border border-brand-dusty-rose text-brand-dusty-rose font-sans text-xs tracking-[0.18em] uppercase px-6 py-3 hover:bg-brand-dusty-rose hover:text-white transition-colors"
                 >
                     Contact Us
-                </a>
+                </Link>
             </div>
         </div>
 

@@ -19,6 +19,10 @@ class ProductForm
                     ->label('Título')
                     ->required(),
 
+                TextInput::make('category')
+                    ->label('Categoría')
+                    ->placeholder('Ej: Snap Tape, Hook & Eye, Bra Closure…'),
+
                 Textarea::make('description')
                     ->label('Descripción')
                     ->rows(4)

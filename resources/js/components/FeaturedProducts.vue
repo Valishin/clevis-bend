@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import { Link } from '@inertiajs/vue3'
+import { useReveal } from '@/composables/useReveal'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css'
@@ -27,6 +30,11 @@ function formatPrice(price: number | null): string {
 function padRef(id: number): string {
     return `CB-${String(id).padStart(3, '0')}`
 }
+
+const heading = ref<HTMLElement | null>(null)
+const grid    = ref<HTMLElement | null>(null)
+useReveal(heading, { children: '[data-reveal]', stagger: 0.1,  y: 20, duration: 0.6 })
+useReveal(grid,    { children: '[data-reveal]', stagger: 0.09, y: 28, duration: 0.6, delay: 0.1 })
 </script>
 
 <template>
@@ -34,11 +42,11 @@ function padRef(id: number): string {
         <div class="max-w-7xl mx-auto">
 
             <!-- Header -->
-            <div class="text-center mb-20">
-                <p class="font-sans text-xs tracking-[0.25em] uppercase text-brand-dusty-rose mb-4">
+            <div ref="heading" class="text-center mb-20">
+                <p data-reveal class="font-sans text-xs tracking-[0.25em] uppercase text-brand-dusty-rose mb-4">
                     Our Products
                 </p>
-                <h2 class="font-display text-4xl lg:text-5xl text-neutral-800">
+                <h2 data-reveal class="font-display text-4xl lg:text-5xl text-neutral-800">
                     Featured Components
                 </h2>
             </div>
@@ -49,10 +57,11 @@ function padRef(id: number): string {
             </div>
 
             <!-- Grid -->
-            <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-brand-champagne border border-brand-champagne">
+            <div v-else ref="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-brand-champagne border border-brand-champagne">
                 <article
                     v-for="product in products"
                     :key="product.id"
+                    data-reveal
                     class="group flex flex-col bg-brand-ivory hover:bg-white transition-colors duration-300"
                 >
                     <!-- Image / Swiper -->
@@ -143,14 +152,14 @@ function padRef(id: number): string {
                             <span v-else class="font-sans text-xs tracking-widest uppercase text-neutral-400">
                                 Request quote
                             </span>
-                            <a :href="`/products/${product.id}`"
+                            <Link :href="`/products/${product.id}`"
                                 class="font-sans text-xs tracking-[0.15em] uppercase text-brand-dusty-rose hover:text-neutral-800 transition-colors flex items-center gap-1.5"
                             >
                                 View
                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
                                 </svg>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </article>
@@ -158,14 +167,14 @@ function padRef(id: number): string {
 
             <!-- CTA -->
             <div class="text-center mt-14">
-                <a href="/products"
+                <Link href="/products"
                     class="inline-flex items-center gap-3 border border-brand-dusty-rose text-brand-dusty-rose font-sans text-xs tracking-[0.18em] uppercase px-8 py-4 hover:bg-brand-dusty-rose hover:text-white transition-colors"
                 >
                     View All Components
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
                     </svg>
-                </a>
+                </Link>
             </div>
         </div>
     </section>

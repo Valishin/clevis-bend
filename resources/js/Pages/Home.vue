@@ -19,10 +19,11 @@ defineProps<{
 </script>
 
 <template>
-    <div class="min-h-screen bg-brand-ivory">
+    <div class="min-h-screen bg-brand-ivory flex flex-col">
         <Navbar />
-        <main>
-            <HeroSection />
+        <!-- Hero: full-bleed detrás del navbar, gestiona su propio pt -->
+        <HeroSection />
+        <main class="flex-1">
             <FeaturedProducts :products="featuredProducts" />
             <CommitmentSection />
         </main>

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import { useReveal } from '@/composables/useReveal'
 import IconQuality     from '@components/icons/IconQuality.vue'
 import IconExpertise   from '@components/icons/IconExpertise.vue'
 import IconPartnership from '@components/icons/IconPartnership.vue'
@@ -44,6 +46,11 @@ const pillars = [
         desc: 'Responsive support and guidance at every step of the sourcing process.',
     },
 ]
+
+const heading = ref<HTMLElement | null>(null)
+const grid    = ref<HTMLElement | null>(null)
+useReveal(heading, { children: '[data-reveal]', stagger: 0.1, y: 20, duration: 0.6 })
+useReveal(grid,    { children: '[data-reveal]', stagger: 0.08, y: 24, duration: 0.6, delay: 0.1 })
 </script>
 
 <template>
@@ -51,20 +58,21 @@ const pillars = [
         <div class="max-w-7xl mx-auto">
 
             <!-- Header -->
-            <div class="text-center mb-20">
-                <p class="font-sans text-xs tracking-[0.25em] uppercase text-brand-dusty-rose mb-4">
+            <div ref="heading" class="text-center mb-20">
+                <p data-reveal class="font-sans text-xs tracking-[0.25em] uppercase text-brand-dusty-rose mb-4">
                     Our Commitment
                 </p>
-                <h2 class="font-display text-4xl lg:text-5xl text-neutral-800">
+                <h2 data-reveal class="font-display text-4xl lg:text-5xl text-neutral-800">
                     Built on Six Pillars
                 </h2>
             </div>
 
             <!-- Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-brand-champagne border border-brand-champagne">
+            <div ref="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-brand-champagne border border-brand-champagne">
                 <div
                     v-for="pillar in pillars"
                     :key="pillar.ref"
+                    data-reveal
                     class="p-10 flex flex-col gap-6"
                 >
                     <!-- Ref code -->

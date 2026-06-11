@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import { cbMonogram } from "@images";
-import { ref } from "vue";
+import { Link, usePage } from "@inertiajs/vue3";
+import { ref, computed } from "vue";
 
 const mobileOpen = ref(false);
+const page = usePage();
+
+function isActive(href: string): boolean {
+    const current = page.url;
+    if (href === '/') return current === '/';
+    return current.startsWith(href);
+}
 
 const links = [
-    { label: "Home", href: "/" },
-    { label: "Products", href: "/products" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
+    { label: "Home",     href: "/",         disabled: false },
+    { label: "Products", href: "/products", disabled: true  },
+    { label: "About",    href: "/about",    disabled: false },
+    { label: "Contact",  href: "/contact",  disabled: false },
 ];
 </script>
 
@@ -20,7 +28,7 @@ const links = [
             class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-20"
         >
             <!-- Logo -->
-            <a href="/" class="flex items-center gap-3 shrink-0">
+            <Link href="/" class="flex items-center gap-3 shrink-0">
                 <img
                     :src="cbMonogram"
                     alt="Clevis Bend"
@@ -31,27 +39,38 @@ const links = [
                 >
                     Clevis Bend
                 </span>
-            </a>
+            </Link>
 
             <!-- Desktop Nav -->
             <nav class="hidden md:flex items-center gap-8">
-                <a
-                    v-for="link in links"
-                    :key="link.href"
-                    :href="link.href"
-                    class="font-sans text-xs tracking-[0.18em] uppercase text-neutral-600 hover:text-brand-dusty-rose transition-colors"
-                >
-                    {{ link.label }}
-                </a>
+                <template v-for="link in links" :key="link.href">
+                    <span
+                        v-if="link.disabled"
+                        class="font-sans text-xs tracking-[0.18em] uppercase text-neutral-300 cursor-not-allowed select-none"
+                        :title="`${link.label} — coming soon`"
+                    >
+                        {{ link.label }}
+                    </span>
+                    <Link
+                        v-else
+                        :href="link.href"
+                        class="relative font-sans text-xs tracking-[0.18em] uppercase transition-colors"
+                        :class="isActive(link.href)
+                            ? 'text-brand-dusty-rose after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-px after:bg-brand-dusty-rose'
+                            : 'text-neutral-600 hover:text-brand-dusty-rose'"
+                    >
+                        {{ link.label }}
+                    </Link>
+                </template>
             </nav>
 
             <!-- CTA Button -->
-            <a
+            <Link
                 href="/contact"
                 class="hidden md:inline-flex items-center border border-brand-dusty-rose text-brand-dusty-rose font-sans text-xs tracking-[0.18em] uppercase px-5 py-2.5 hover:bg-brand-dusty-rose hover:text-white transition-colors"
             >
                 Request Sample
-            </a>
+            </Link>
 
             <!-- Mobile toggle -->
             <button
@@ -90,21 +109,29 @@ const links = [
             v-if="mobileOpen"
             class="md:hidden bg-brand-ivory border-t border-brand-champagne px-6 py-6 flex flex-col gap-5"
         >
-            <a
-                v-for="link in links"
-                :key="link.href"
-                :href="link.href"
-                class="font-sans text-xs tracking-[0.18em] uppercase text-neutral-600"
-                @click="mobileOpen = false"
-            >
-                {{ link.label }}
-            </a>
-            <a
+            <template v-for="link in links" :key="link.href">
+                <span
+                    v-if="link.disabled"
+                    class="font-sans text-xs tracking-[0.18em] uppercase text-neutral-300 cursor-not-allowed"
+                >
+                    {{ link.label }}
+                </span>
+                <Link
+                    v-else
+                    :href="link.href"
+                    class="font-sans text-xs tracking-[0.18em] uppercase transition-colors"
+                    :class="isActive(link.href) ? 'text-brand-dusty-rose' : 'text-neutral-600'"
+                    @click="mobileOpen = false"
+                >
+                    {{ link.label }}
+                </Link>
+            </template>
+            <Link
                 href="/contact"
                 class="mt-2 self-start border border-brand-dusty-rose text-brand-dusty-rose font-sans text-xs tracking-[0.18em] uppercase px-5 py-2.5"
             >
                 Request Sample
-            </a>
+            </Link>
         </div>
     </header>
 </template>
