@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { Link } from '@inertiajs/vue3'
 import { useReveal } from '@/composables/useReveal'
+import CbButton from '@components/CbButton.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css'
@@ -62,7 +63,7 @@ useReveal(grid,    { children: '[data-reveal]', stagger: 0.09, y: 28, duration: 
                     v-for="product in products"
                     :key="product.id"
                     data-reveal
-                    class="group flex flex-col bg-brand-ivory hover:bg-white transition-colors duration-300"
+                    class="group flex flex-col bg-brand-ivory hover:bg-white transition-all duration-300 shadow-[0_4px_24px_0_rgba(181,155,133,0.22)] hover:shadow-[0_12px_40px_0_rgba(181,155,133,0.38)]"
                 >
                     <!-- Image / Swiper -->
                     <div class="relative aspect-square overflow-hidden bg-brand-champagne/60">
@@ -167,14 +168,12 @@ useReveal(grid,    { children: '[data-reveal]', stagger: 0.09, y: 28, duration: 
 
             <!-- CTA -->
             <div class="text-center mt-14">
-                <Link href="/products"
-                    class="inline-flex items-center gap-3 border border-brand-dusty-rose text-brand-dusty-rose font-sans text-xs tracking-[0.18em] uppercase px-8 py-4 hover:bg-brand-dusty-rose hover:text-white transition-colors"
-                >
+                <CbButton href="/products" variant="outline">
                     View All Components
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
                     </svg>
-                </Link>
+                </CbButton>
             </div>
         </div>
     </section>

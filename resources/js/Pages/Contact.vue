@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import AppLayout from '@components/layout/AppLayout.vue'
-import { useForm, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue'
+import CbButton from '@components/CbButton.vue'
+import AppLayout from '@components/layout/AppLayout.vue'
+import CbButton  from '@components/CbButton.vue'
+import { useForm, usePage } from '@inertiajs/vue3'
 
 const page = usePage()
 const success = computed(() => page.props.flash?.success as string | undefined)
@@ -20,6 +22,7 @@ function submit() {
     form.post('/contact', { preserveScroll: true })
 }
 
+
 const inquiryTypes = [
     'General Inquiry',
     'Request a Sample',
@@ -36,10 +39,10 @@ const inquiryTypes = [
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
 
                 <!-- ── LEFT ── -->
-                <div class="flex flex-col gap-10">
+                <div  class="flex flex-col gap-10">
 
                     <!-- Heading -->
-                    <div>
+                    <div data-reveal>
                         <p class="font-sans text-xs tracking-[0.25em] uppercase text-brand-dusty-rose mb-5">
                             Contact
                         </p>
@@ -54,7 +57,7 @@ const inquiryTypes = [
                     </div>
 
                     <!-- Info items -->
-                    <div class="flex flex-col gap-7">
+                    <div data-reveal class="flex flex-col gap-7">
 
                         <div class="flex items-start gap-4">
                             <svg class="w-5 h-5 text-brand-dusty-rose/60 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -93,13 +96,13 @@ const inquiryTypes = [
                 </div>
 
                 <!-- ── RIGHT: Form ── -->
-                <div>
+                <div >
                     <!-- Success message -->
                     <div v-if="success" class="mb-8 border border-brand-dusty-rose/30 bg-brand-champagne/50 px-6 py-4">
                         <p class="font-sans text-sm text-brand-dusty-rose">{{ success }}</p>
                     </div>
 
-                    <form @submit.prevent="submit" class="flex flex-col gap-6" novalidate>
+                    <form data-reveal @submit.prevent="submit" class="flex flex-col gap-6" novalidate>
 
                         <!-- Row 1: Name + Company -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -199,16 +202,12 @@ const inquiryTypes = [
 
                         <!-- Submit -->
                         <div>
-                            <button
-                                type="submit"
-                                :disabled="form.processing"
-                                class="inline-flex items-center gap-3 bg-brand-dusty-rose text-white font-sans text-xs tracking-[0.18em] uppercase px-8 py-4 hover:bg-[#a08876] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-                            >
+                            <CbButton type="submit" variant="solid" :disabled="form.processing">
                                 <span>{{ form.processing ? 'Sending…' : 'Send Inquiry' }}</span>
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12zm0 0h7.5"/>
                                 </svg>
-                            </button>
+                            </CbButton>
                         </div>
 
                     </form>

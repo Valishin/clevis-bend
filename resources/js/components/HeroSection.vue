@@ -1,83 +1,158 @@
 <script setup lang="ts">
 import { useParallax } from "@/composables/useParallax";
-import { useReveal } from "@/composables/useReveal";
-import { heroBg } from "@images";
-import { Link } from "@inertiajs/vue3";
+import CbButton from "@components/CbButton.vue";
 import { ref } from "vue";
+
+interface Cta {
+    label: string;
+    href: string;
+    primary?: boolean;
+}
+
+const props = withDefaults(
+    defineProps<{
+        /** Texto pequeño encima del título */
+        eyebrow?: string;
+        /** Primera línea del h1 (normal) */
+        title: string;
+        /** Segunda línea del h1 (itálica + color marca) */
+        titleItalic?: string;
+        /** Párrafo descriptivo */
+        description?: string;
+        /** Imagen de fondo */
+        image?: string;
+        /** Botones CTA */
+        ctas?: Cta[];
+        /** Texto metadata esquina inferior derecha */
+        meta?: string[];
+        /** Altura: 'full' = min-h-screen, 'half' = más compacto para interiores */
+        size?: "full" | "half";
+        /** Dirección del gradiente overlay */
+        gradient?: "left" | "right" | "center" | "none";
+    }>(),
+    {
+        eyebrow: "",
+        titleItalic: "",
+        description: "",
+        image: "",
+        ctas: () => [],
+        meta: () => [],
+        size: "full",
+        gradient: "left",
+    },
+);
 
 const section = ref<HTMLElement | null>(null);
 const imgEl = ref<HTMLElement | null>(null);
 const content = ref<HTMLElement | null>(null);
 
-useReveal(content, {
-    children: "[data-reveal]",
-    stagger: 0.12,
-    y: 32,
-    duration: 0.8,
-});
-useParallax(section, imgEl, content, { imageSpeed: 0.4, textSpeed: 0.06 });
+// Parallax siempre que haya imagen
+if (props.image) {
+    useParallax(section, imgEl, content, { imageSpeed: 0.4, textSpeed: 0.06 });
+}
+
+const gradientClass: Record<string, string> = {
+    left: "bg-gradient-to-r from-brand-ivory/90 via-brand-ivory/60 to-transparent",
+    right: "bg-gradient-to-l from-brand-ivory/90 via-brand-ivory/60 to-transparent",
+    center: "bg-gradient-to-b from-transparent via-brand-ivory/50 to-brand-ivory/80",
+    none: "",
+};
 </script>
 
 <template>
     <section
         ref="section"
-        class="relative min-h-screen flex items-center overflow-hidden"
+        :class="[
+            'relative flex items-center overflow-hidden',
+            size === 'full' ? 'min-h-screen' : 'min-h-[40vh] lg:min-h-[50vh]',
+            !image ? 'bg-brand-ivory border-b border-brand-champagne' : '',
+        ]"
     >
         <!-- Background image -->
-        <div class="absolute inset-0">
-            <img
-                ref="imgEl"
-                :src="heroBg"
-                alt=""
-                class="w-full h-full object-cover object-center will-change-transform"
-                style="transform: scale(1.15)"
-            />
-            <div
-                class="absolute inset-0 bg-gradient-to-r from-brand-ivory/85 via-brand-ivory/60 to-transparent"
-            />
-        </div>
+        <template v-if="image">
+            <div class="absolute inset-0">
+                <img
+                    ref="imgEl"
+                    :src="image"
+                    alt=""
+                    class="w-full h-full object-cover object-center will-change-transform"
+                    :style="size === 'full' ? 'transform: scale(1.15)' : ''"
+                />
+                <div
+                    v-if="gradient !== 'none'"
+                    :class="['absolute inset-0', gradientClass[gradient]]"
+                />
+            </div>
+        </template>
 
         <!-- Content -->
         <div
             ref="content"
-            class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 w-full pt-24 lg:pt-32 pb-16 lg:pb-24 will-change-transform"
+            class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 w-full will-change-transform"
+            :class="
+                size === 'full'
+                    ? 'pt-24 lg:pt-32 pb-16 lg:pb-24'
+                    : 'py-20 lg:py-28'
+            "
         >
-            <div class="max-w-xl">
+            <div :class="size === 'full' ? 'max-w-xl' : 'max-w-3xl'">
+                <!-- Eyebrow -->
                 <p
+                    v-if="eyebrow"
                     data-reveal
-                    class="font-sans text-xs tracking-[0.25em] uppercase text-brand-dusty-rose mb-8"
+                    class="font-sans text-xs tracking-[0.25em] uppercase text-brand-dusty-rose mb-5"
                 >
-                    Ref: CB-MFG / Est. USA
+                    {{ eyebrow }}
                 </p>
 
-                <h1 data-reveal class="font-display leading-tight mb-6">
+                <!-- Title -->
+                <h1
+                    data-reveal
+                    class="font-display leading-tight mb-6"
+                    :class="
+                        size === 'full'
+                            ? 'text-4xl sm:text-5xl lg:text-7xl'
+                            : 'text-4xl sm:text-5xl lg:text-6xl'
+                    "
+                >
+                    <span class="block text-neutral-800">{{ title }}</span>
                     <span
-                        class="block text-4xl sm:text-5xl lg:text-7xl text-neutral-800"
-                        >The Foundation</span
+                        v-if="titleItalic"
+                        class="block italic text-brand-dusty-rose"
                     >
-                    <span
-                        class="block text-4xl sm:text-5xl lg:text-7xl italic text-brand-dusty-rose"
-                        >of Form</span
-                    >
+                        {{ titleItalic }}
+                    </span>
                 </h1>
 
+                <!-- Description -->
                 <p
+                    v-if="description"
                     data-reveal
-                    class="font-sans text-base lg:text-lg text-neutral-600 leading-relaxed mb-12 max-w-md"
+                    class="font-sans text-base lg:text-lg leading-relaxed mb-10"
+                    :class="
+                        image
+                            ? 'text-neutral-600 max-w-md'
+                            : 'text-neutral-500 max-w-lg'
+                    "
                 >
-                    High-performance lingerie components built on decades of
-                    factory-floor expertise. Snap tapes, hook &amp; eye
-                    closures, and precision accessories for the world's finest
-                    intimate brands.
+                    {{ description }}
                 </p>
 
-                <div data-reveal class="flex flex-wrap gap-4">
-                    <Link
-                        href="/products"
-                        class="inline-flex items-center gap-3 bg-brand-dusty-rose text-white font-sans text-xs tracking-[0.18em] uppercase px-7 py-4 hover:bg-[#a08876] transition-colors"
+                <!-- CTAs -->
+                <div
+                    v-if="ctas.length"
+                    data-reveal
+                    class="flex flex-wrap gap-4"
+                >
+                    <CbButton
+                        v-for="cta in ctas"
+                        :key="cta.href"
+                        :href="cta.href"
+                        :variant="cta.primary ? 'solid' : 'ghost'"
                     >
-                        Explore Components
+                        {{ cta.label }}
                         <svg
+                            v-if="cta.primary"
                             class="w-4 h-4"
                             fill="none"
                             stroke="currentColor"
@@ -90,14 +165,11 @@ useParallax(section, imgEl, content, { imageSpeed: 0.4, textSpeed: 0.06 });
                                 d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
                             />
                         </svg>
-                    </Link>
-                    <Link
-                        href="/contact"
-                        class="inline-flex items-center border border-brand-dusty-rose text-brand-dusty-rose font-sans text-xs tracking-[0.18em] uppercase px-7 py-4 hover:bg-brand-dusty-rose hover:text-white transition-colors"
-                    >
-                        Request a Sample
-                    </Link>
+                    </CbButton>
                 </div>
+
+                <!-- Slot para contenido extra -->
+                <slot />
             </div>
         </div>
     </section>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppLayout from '@components/layout/AppLayout.vue'
 import { Link } from '@inertiajs/vue3'
+import CbButton from '@components/CbButton.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Pagination, Thumbs } from 'swiper/modules'
 import { ref } from 'vue'
@@ -63,7 +64,7 @@ function getIcon(title: string | null): string {
         <div class="max-w-7xl mx-auto px-6 lg:px-10 py-12 lg:py-16">
 
                 <!-- Back -->
-                <Link href="/products" class="inline-flex items-center gap-2 font-sans text-xs tracking-[0.18em] uppercase text-neutral-500 hover:text-brand-dusty-rose transition-colors mb-8 lg:mb-12">
+                <Link href="/products" data-reveal class="inline-flex items-center gap-2 font-sans text-xs tracking-[0.18em] uppercase text-neutral-500 hover:text-brand-dusty-rose transition-colors mb-8 lg:mb-12">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
                     </svg>
@@ -74,7 +75,7 @@ function getIcon(title: string | null): string {
                 <div class="product-detail-grid">
 
                     <!-- ── LEFT: Images ── -->
-                    <div class="flex flex-col gap-4 lg:sticky lg:top-24 w-full">
+                    <div data-reveal class="flex flex-col gap-4 lg:sticky lg:top-24 w-full">
                         <!-- Main swiper -->
                         <Swiper
                             v-if="product.images.length > 0"
@@ -120,7 +121,7 @@ function getIcon(title: string | null): string {
                     </div>
 
                     <!-- ── RIGHT: Info ── -->
-                    <div class="flex flex-col gap-8">
+                    <div data-reveal class="flex flex-col gap-8">
 
                         <!-- Breadcrumb ref -->
                         <p class="font-sans text-xs tracking-[0.2em] uppercase text-neutral-400">
@@ -183,19 +184,15 @@ function getIcon(title: string | null): string {
 
                         <!-- CTAs -->
                         <div class="flex flex-wrap gap-4 pt-2">
-                            <Link href="/contact"
-                                class="inline-flex items-center gap-3 bg-brand-dusty-rose text-white font-sans text-xs tracking-[0.18em] uppercase px-8 py-4 hover:bg-[#a08876] transition-colors"
-                            >
+                            <CbButton href="/contact" variant="solid">
                                 Request Technical Sample
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
                                 </svg>
-                            </Link>
-                            <Link href="/contact"
-                                class="inline-flex items-center gap-3 border border-brand-dusty-rose text-brand-dusty-rose font-sans text-xs tracking-[0.18em] uppercase px-8 py-4 hover:bg-brand-dusty-rose hover:text-white transition-colors"
-                            >
+                            </CbButton>
+                            <CbButton href="/contact" variant="outline">
                                 Consult with Expert
-                            </Link>
+                            </CbButton>
                         </div>
                     </div>
                 </div>
