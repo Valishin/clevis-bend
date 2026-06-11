@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@fontsource/forum':
+        specifier: ^5.2.8
+        version: 5.2.8
+      '@fontsource/work-sans':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@inertiajs/vue3':
         specifier: ^3.3.0
         version: 3.3.0(vue@3.5.35(typescript@6.0.3))
@@ -76,6 +82,12 @@ packages:
 
   '@emnapi/wasi-threads@1.2.1':
     resolution: {integrity: sha512-uTII7OYF+/Mes/MrcIOYp5yOtSMLBWSIoLPpcgwipoiKbli6k322tcoFsxoIIxPDqW01SQGAgko4EzZi2BNv2w==}
+
+  '@fontsource/forum@5.2.8':
+    resolution: {integrity: sha512-r2/sOXhL46y6YyDJ4d2zHA+KGsRbaT5d8zC2bgLsOoyBW4WqjpxbjgfHdrRo697LLAsCKryiP9aYSFDcMGu7IQ==}
+
+  '@fontsource/work-sans@5.2.8':
+    resolution: {integrity: sha512-6LaHjVVgts+rnrcqvEkP2+iUB/jw1oDSYsGO0+TltAhnWki9Hnf/UGpgMQh2jcm0GEH8VqCPnq4PpmHLFzxXtQ==}
 
   '@inertiajs/core@3.3.0':
     resolution: {integrity: sha512-6tEe5vtjwXJj68h0nkz84WkeZ8XA0phJ8ep1l/V+im62KTzlZTw9sxlmf8uNKu4seleXVw+idw48svxUCWla/Q==}
@@ -792,6 +804,10 @@ snapshots:
     dependencies:
       tslib: 2.8.1
     optional: true
+
+  '@fontsource/forum@5.2.8': {}
+
+  '@fontsource/work-sans@5.2.8': {}
 
   '@inertiajs/core@3.3.0':
     dependencies:
