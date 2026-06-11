@@ -113,7 +113,7 @@ const statsData = [
                         <CbButton href="/products" variant="solid">
                             Explore Products
                             <svg
-                                class="w-4 h-4"
+                                class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
                                 fill="none"
                                 stroke="currentColor"
                                 stroke-width="1.5"

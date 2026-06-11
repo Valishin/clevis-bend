@@ -65,7 +65,7 @@ function getIcon(title: string | null): string {
 
                 <!-- Back -->
                 <Link href="/products" data-reveal class="inline-flex items-center gap-2 font-sans text-xs tracking-[0.18em] uppercase text-neutral-500 hover:text-brand-dusty-rose transition-colors mb-8 lg:mb-12">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
                     </svg>
                     Back to Products
@@ -186,7 +186,7 @@ function getIcon(title: string | null): string {
                         <div class="flex flex-wrap gap-4 pt-2">
                             <CbButton href="/contact" variant="solid">
                                 Request Technical Sample
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
                                 </svg>
                             </CbButton>

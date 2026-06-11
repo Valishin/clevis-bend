@@ -1,22 +1,22 @@
 <script setup lang="ts">
 import { cbMonogram } from "@images";
 import { Link, usePage } from "@inertiajs/vue3";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 
 const mobileOpen = ref(false);
 const page = usePage();
 
 function isActive(href: string): boolean {
     const current = page.url;
-    if (href === '/') return current === '/';
+    if (href === "/") return current === "/";
     return current.startsWith(href);
 }
 
 const links = [
-    { label: "Home",     href: "/",         disabled: false },
-    { label: "Products", href: "/products", disabled: true  },
-    { label: "About",    href: "/about",    disabled: false },
-    { label: "Contact",  href: "/contact",  disabled: false },
+    { label: "Home", href: "/", disabled: false },
+    { label: "Products", href: "/products", disabled: true },
+    { label: "About", href: "/about", disabled: false },
+    { label: "Contact", href: "/contact", disabled: false },
 ];
 </script>
 
@@ -32,7 +32,7 @@ const links = [
                 <img
                     :src="cbMonogram"
                     alt="Clevis Bend"
-                    class="h-9 lg:h-11 w-auto object-contain"
+                    class="h-9 lg:h-15 w-auto object-contain"
                 />
                 <span
                     class="font-display text-xl lg:text-2xl tracking-widest text-brand-dusty-rose hidden sm:block"
@@ -55,9 +55,11 @@ const links = [
                         v-else
                         :href="link.href"
                         class="relative font-sans text-xs tracking-[0.18em] uppercase transition-colors"
-                        :class="isActive(link.href)
-                            ? 'text-brand-dusty-rose after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-px after:bg-brand-dusty-rose'
-                            : 'text-neutral-600 hover:text-brand-dusty-rose'"
+                        :class="
+                            isActive(link.href)
+                                ? 'text-brand-dusty-rose after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-px after:bg-brand-dusty-rose'
+                                : 'text-neutral-600 hover:text-brand-dusty-rose'
+                        "
                     >
                         {{ link.label }}
                     </Link>
@@ -120,7 +122,11 @@ const links = [
                     v-else
                     :href="link.href"
                     class="font-sans text-xs tracking-[0.18em] uppercase transition-colors"
-                    :class="isActive(link.href) ? 'text-brand-dusty-rose' : 'text-neutral-600'"
+                    :class="
+                        isActive(link.href)
+                            ? 'text-brand-dusty-rose'
+                            : 'text-neutral-600'
+                    "
                     @click="mobileOpen = false"
                 >
                     {{ link.label }}

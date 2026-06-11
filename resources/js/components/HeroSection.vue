@@ -153,7 +153,7 @@ const gradientClass: Record<string, string> = {
                         {{ cta.label }}
                         <svg
                             v-if="cta.primary"
-                            class="w-4 h-4"
+                            class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
                             fill="none"
                             stroke="currentColor"
                             stroke-width="1.5"
